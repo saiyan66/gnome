@@ -14,16 +14,16 @@ model User {
   id             String    @id @default(cuid())
   email          String    @unique
   name           String?
-  hashedPassword String?                        // nullable because Google OAuth users don't have one
-  image          String?                        // profile picture URL from Google
+  hashedPassword String?                      
+  image          String?                     
   role           Role      @default(CUSTOMER)
   emailVerified  DateTime?                      // required by NextAuth adapter
 
 
   // relations
 
-  accounts  Account[]  // OAuth accounts linked to this user (NextAuth)
-  sessions  Session[]  // active sessions (NextAuth)
+  accounts  Account[]         // OAuth accounts linked to this user (NextAuth)
+  sessions  Session[]         // active sessions (NextAuth)
   orders    Order[]
   cartItems CartItem[]
 
@@ -48,7 +48,7 @@ model Account {
   id                String  @id @default(cuid())
   userId            String
   type              String
-  provider          String  // "google", "credentials", etc.
+  provider          String              // "google", "credentials", etc.
   providerAccountId String
   refresh_token     String? @db.Text
   access_token      String? @db.Text
